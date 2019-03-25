@@ -16,6 +16,7 @@ public class Main extends Application {
         primaryStage.setTitle("Swedbank");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
+        System.out.println("hello");
     }
 
 
