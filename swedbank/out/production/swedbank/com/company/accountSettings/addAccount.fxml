@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.accountSettings.AddAccountController">
+   <children>
+      <TextField fx:id="amountToNewAccountBox" layoutX="279.0" layoutY="238.0" />
+      <Label layoutX="125.0" layoutY="243.0" text="Belopp du vill lägga till " />
+      <Button fx:id="addAccountButton" layoutX="379.0" layoutY="285.0" mnemonicParsing="false" onAction="#addAccount" text="Lägg till" />
+      <TextField fx:id="accountNumberBox" layoutX="279.0" layoutY="195.0" />
+      <TextField fx:id="accountNameBox" layoutX="279.0" layoutY="146.0" />
+      <Label layoutX="177.0" layoutY="200.0" text="kontonummer" />
+      <Label layoutX="189.0" layoutY="151.0" text="konto namn" />
+      <Text fill="RED" layoutX="217.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lägg till konto" wrappingWidth="167.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="goHomeButton" layoutX="148.0" layoutY="285.0" mnemonicParsing="false" onAction="#goHome" text="Gå tillbaka" />
+      <Label fx:id="errorMessageBox" layoutX="135.0" layoutY="361.0" prefHeight="27.0" prefWidth="456.0" textFill="RED" />
+   </children>
+</AnchorPane>

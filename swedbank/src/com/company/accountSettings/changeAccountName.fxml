@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.accountSettings.ChangeAccountNameController">
+   <children>
+      <Button fx:id="goHomeButton" layoutX="191.0" layoutY="258.0" mnemonicParsing="false" onAction="#goHome" text="Gå tillbaka" />
+      <Text fill="RED" layoutX="193.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ändra konto namn" wrappingWidth="214.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+      <Label layoutX="140.0" layoutY="166.0" text="Nuvarande konto namn" />
+      <Label layoutX="182.0" layoutY="215.0" text="Nya konto namn" />
+      <TextField fx:id="newAccountNameBox" layoutX="294.0" layoutY="210.0" />
+      <Button fx:id="changeAccountNameButton" layoutX="394.0" layoutY="258.0" mnemonicParsing="false" onAction="#changeAccountName" text="Ändra" />
+      <ComboBox fx:id="dropDownAccountsList" layoutX="294.0" layoutY="161.0" prefHeight="27.0" prefWidth="167.0" promptText="Välj konto" />
+      <Label fx:id="errorMessageBox" layoutX="145.0" layoutY="371.0" prefHeight="27.0" prefWidth="456.0" textFill="RED" />
+   </children>
+</AnchorPane>

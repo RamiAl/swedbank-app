@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="405.0" prefWidth="598.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.transfer.TransferToOthersAccountController">
+   <children>
+      <Accordion layoutX="38.0" layoutY="18.0" />
+      <Accordion layoutX="49.0" layoutY="30.0" />
+      <Label fx:id="errorMessageBox" layoutX="138.0" layoutY="365.0" prefHeight="27.0" prefWidth="456.0" textFill="RED" />
+      <ComboBox fx:id="toDropDownAccountsList" layoutX="254.0" layoutY="201.0" prefWidth="150.0" promptText="Välj konto" />
+      <ComboBox fx:id="fromDropDownAccountsList" layoutX="254.0" layoutY="141.0" prefWidth="150.0" promptText="Välj konto" />
+      <Button fx:id="goHomeButton" layoutX="176.0" layoutY="305.0" mnemonicParsing="false" onAction="#goHome" text="Gå tillbaka" />
+      <TextField fx:id="amountBox" layoutX="254.0" layoutY="258.0" prefHeight="27.0" prefWidth="150.0" />
+      <Label layoutX="200.0" layoutY="263.0" text="Belopp" />
+      <Button fx:id="sendButton" layoutX="387.0" layoutY="305.0" mnemonicParsing="false" onAction="#sendAmountToOthersAccount" text="Skicka" />
+      <Label layoutX="213.0" layoutY="206.0" text="Till" />
+      <Label layoutX="206.0" layoutY="146.0" text="Från " />
+      <Text fill="RED" layoutX="168.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Överföra till andras konto" wrappingWidth="322.21875">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
