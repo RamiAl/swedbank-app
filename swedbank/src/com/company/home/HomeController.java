@@ -96,8 +96,8 @@ public class HomeController {
             setErrorMessageBox("Du måste först välja konto");
         }else {
             myAccount = (MyAccount) myAccountsList.getSelectionModel().getSelectedItem();
-            DB.deleteTransactionFromDB(myAccount.getKontoNumber());
-            DB.deleteAccountFromDB(myAccount.getKontoNumber());
+            DB.deleteFromDB("transactions",myAccount.getKontoNumber());
+            DB.deleteFromDB("allAccounts",myAccount.getKontoNumber());
             myAccountsList.getItems().clear();
             displayMyAccounts(user.getUserID());
         }

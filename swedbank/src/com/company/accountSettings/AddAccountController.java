@@ -35,8 +35,8 @@ public class AddAccountController {
                 if (accountTypeValidation()==true){
                     if (validation(accountNumberBox.getText(),
                             "kontonumret kan inte innehålla några tecken eller vara tom!") == true) {
-                        if (accountNumberBox.getLength() != 4) {
-                            setErrorMessageBox("Kontonumret måste vara 14 siffror!");
+                        if (accountNumberBox.getLength() != 12) {
+                            setErrorMessageBox("Kontonumret måste vara 12 siffror!");
                         } else {
                             if (accountNumberValidation()==true){
                                 if (validation(amountToNewAccountBox.getText(),

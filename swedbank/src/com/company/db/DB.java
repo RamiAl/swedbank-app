@@ -39,7 +39,7 @@ public abstract class DB {
 
     public static List <AccountTypeList> getAllAccountsTypeFromDB(){
         String query =
-                "SELECT kontoType FROM myAccounts";
+                "SELECT kontoType FROM allAccounts";
         try {
             PreparedStatement stmt = prep(query);
             return (List<AccountTypeList>)(List<?>)new ObjectMapper<>(AccountTypeList.class).map(stmt.executeQuery());
@@ -74,7 +74,7 @@ public abstract class DB {
     public static MyAccount getUsersAccountFromDB(long userID, String kontoType){
         MyAccount result = null;
         String query =
-                "SELECT kontoNumber FROM myAccounts WHERE user_ID =? AND kontoType = ? ";
+                "SELECT kontoNumber FROM allAccounts WHERE user_ID =? AND kontoType = ? ";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setLong(1, userID);
@@ -86,7 +86,7 @@ public abstract class DB {
 
     public static List <MyAccount> getAllAccountNumbersFromDB(){
         String query =
-                "SELECT kontoNumber FROM myAccounts";
+                "SELECT kontoNumber FROM allAccounts";
         try {
             PreparedStatement stmt = prep(query);
             return (List<MyAccount>)(List<?>)new ObjectMapper<>(MyAccount.class).map(stmt.executeQuery());
@@ -96,7 +96,7 @@ public abstract class DB {
 
     public static List<MyAccount> getMyAccountsFromDB(long userID){
             String query =
-                    "SELECT kontoType, currentAmount, kontoNumber FROM myAccounts WHERE user_ID = ?";
+                    "SELECT kontoType, currentAmount, kontoNumber FROM allAccounts WHERE user_ID = ?";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setLong(1, userID);
@@ -107,7 +107,7 @@ public abstract class DB {
 
     public static void setNewAmountToAccount(String sign, String amount, String kontoNumber){
         String query =
-                "UPDATE myAccounts SET currentAmount = currentAmount "+sign+" ? " +
+                "UPDATE allAccounts SET currentAmount = currentAmount "+sign+" ? " +
                         "WHERE kontoNumber = ?";
         try {
             PreparedStatement stmt = prep(query);
@@ -120,7 +120,7 @@ public abstract class DB {
 
     public static void addAccountToDB(long userID, String accountName, String accountNumber, String amountToNewAccount){
         String query =
-                "INSERT INTO myAccounts SET user_ID = ?, kontoType = ?, kontoNumber = ?, currentAmount = ?";
+                "INSERT INTO allAccounts SET user_ID = ?, kontoType = ?, kontoNumber = ?, currentAmount = ?";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setLong(1, userID);
@@ -132,20 +132,9 @@ public abstract class DB {
 
     }
 
-    public static void deleteAccountFromDB(String kontoNumber){
+    public static void deleteFromDB(String tabell, String kontoNumber){
         String query =
-                "DELETE FROM myAccounts WHERE kontoNumber = ?";
-        try {
-            PreparedStatement stmt = prep(query);
-            stmt.setString(1, kontoNumber);
-            stmt.executeUpdate();
-        } catch (Exception e) { e.printStackTrace(); }
-
-    }
-
-    public static void deleteTransactionFromDB(String kontoNumber){
-        String query =
-                "DELETE FROM transactions WHERE kontoNumber = ?";
+                "DELETE FROM "+tabell+" WHERE kontoNumber = ?";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setString(1, kontoNumber);
@@ -156,7 +145,7 @@ public abstract class DB {
 
     public static void changeAccountNameInDB(String kontoNumber, String newAccountName){
         String query =
-                "UPDATE myAccounts SET kontoType = ?"+
+                "UPDATE allAccounts SET kontoType = ?"+
                         "WHERE kontoNumber = ?";
         try {
             PreparedStatement stmt = prep(query);
@@ -169,7 +158,7 @@ public abstract class DB {
 
     public static void setSalaryToMyLonekonto(String amount, long userID, String kontoType){
         String query =
-                "UPDATE myAccounts SET currentAmount = currentAmount + ?"+
+                "UPDATE allAccounts SET currentAmount = currentAmount + ?"+
                         "WHERE kontoNumber = ?";
         try {
             PreparedStatement stmt = prep(query);

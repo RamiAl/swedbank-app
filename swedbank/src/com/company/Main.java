@@ -13,10 +13,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         stage = primaryStage;
         Parent root = FXMLLoader.load(getClass().getResource("login/logIn.fxml"));
-        primaryStage.setTitle("Swedbank");
+        primaryStage.setTitle("Swedbank-app");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();
-        System.out.println("hello");
     }
 
 

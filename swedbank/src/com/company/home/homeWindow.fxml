@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -18,7 +15,7 @@
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="showTranscationsButton" layoutX="215.0" layoutY="305.0" mnemonicParsing="false" onAction="#goToTransactions" text="Visa transaktioner" />
+      <Button fx:id="showTranscationsButton" layoutX="204.0" layoutY="305.0" mnemonicParsing="false" onAction="#goToTransactions" text="Visa transaktioner" />
       <ListView fx:id="transactionList" layoutX="279.0" layoutY="100.0" prefHeight="193.0" prefWidth="316.0" />
       <Text fill="#d70000" layoutX="279.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Snaste transaktioner">
          <font>
@@ -31,7 +28,7 @@
          </font>
       </Text>
       <Button fx:id="visaMerButton" layoutX="514.0" layoutY="305.0" mnemonicParsing="false" onAction="#visaMerTransaktioner" text="Visa mer" />
-      <Button fx:id="overforingButton" layoutX="2.0" layoutY="305.0" mnemonicParsing="false" onAction="#sendAmountToMyOtherAccount" text="Överföra till dinaandra konton" />
+      <Button fx:id="overforingButton" layoutX="2.0" layoutY="305.0" mnemonicParsing="false" onAction="#sendAmountToMyOtherAccount" text="Överföra mellan dina konton" />
       <Button fx:id="changeAccountNameButton" layoutX="184.0" layoutY="349.0" mnemonicParsing="false" onAction="#changeAccountName" text="Ändra namn på konto" />
       <Button fx:id="DeleteAccountButton" layoutX="349.0" layoutY="349.0" mnemonicParsing="false" onAction="#deleteAccount" text="Ta bort konto!" />
       <Button fx:id="addAccountButton" layoutX="466.0" layoutY="349.0" mnemonicParsing="false" onAction="#addAccount" text="Lägg till konto" />
@@ -41,7 +38,7 @@
          </font>
       </Text>
       <Button fx:id="logOutButton" layoutX="518.0" layoutY="13.0" mnemonicParsing="false" onAction="#logOut" text="Logg ut" />
-      <Label fx:id="errorMessageBox" layoutX="170.0" layoutY="394.0" prefHeight="27.0" prefWidth="261.0" textFill="RED" />
+      <Label fx:id="errorMessageBox" layoutX="198.0" layoutY="388.0" prefHeight="27.0" prefWidth="205.0" textFill="RED" />
       <Button fx:id="overforingToOthersButton" layoutX="4.0" layoutY="349.0" mnemonicParsing="false" onAction="#sendAmountToOthersAccount" text="Överföra till andra konto" />
    </children>
 </AnchorPane>
