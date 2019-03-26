@@ -96,10 +96,15 @@ public class HomeController {
             setErrorMessageBox("Du måste först välja konto");
         }else {
             myAccount = (MyAccount) myAccountsList.getSelectionModel().getSelectedItem();
-            DB.deleteFromDB("transactions",myAccount.getKontoNumber());
-            DB.deleteFromDB("allAccounts",myAccount.getKontoNumber());
-            myAccountsList.getItems().clear();
-            displayMyAccounts(user.getUserID());
+            if (myAccount.getKontoType().equals("kortkonto")){
+                setErrorMessageBox("Du får inte ta bort konto som andra överföra till!");
+            }else {
+                setErrorMessageBox("");
+                DB.deleteFromDB("transactions", myAccount.getKontoNumber());
+                DB.deleteFromDB("allAccounts", myAccount.getKontoNumber());
+                myAccountsList.getItems().clear();
+                displayMyAccounts(user.getUserID());
+            }
         }
     }
 

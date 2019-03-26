@@ -35,13 +35,21 @@ public class ChangeAccountNameController {
 
     @FXML
     void changeAccountName() {
+        getSelectedItem = (MyAccount) dropDownAccountsList.getSelectionModel().getSelectedItem();
         if (dropDownAccountsList == null) {
             setErrorMessageBox("Du måste välja konto!");
         } else {
-            if (accountTypeValidation() == true) {
-                getSelectedItem = (MyAccount) dropDownAccountsList.getSelectionModel().getSelectedItem();
-                DB.changeAccountNameInDB(getSelectedItem.getKontoNumber(), newAccountNameBox.getText());
-                logInController.switchScene("/com/company/home/homeWindow.fxml");
+            if (getSelectedItem.getKontoType().equals("kortkonto")){
+                setErrorMessageBox("Du får inte ändra namn på konton som andra överföra till!");
+            } else {
+                if (accountTypeValidation() == true) {
+                    if (getSelectedItem.getKontoType().equals("kortkonto")) {
+                        setErrorMessageBox("Du får inte ändra namn på konton som andra överföra till!");
+                    } else {
+                        DB.changeAccountNameInDB(getSelectedItem.getKontoNumber(), newAccountNameBox.getText());
+                        logInController.switchScene("/com/company/home/homeWindow.fxml");
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -38,7 +39,7 @@
          </font>
       </Text>
       <Button fx:id="logOutButton" layoutX="518.0" layoutY="13.0" mnemonicParsing="false" onAction="#logOut" text="Logg ut" />
-      <Label fx:id="errorMessageBox" layoutX="198.0" layoutY="388.0" prefHeight="27.0" prefWidth="205.0" textFill="RED" />
+      <Label fx:id="errorMessageBox" layoutX="198.0" layoutY="388.0" prefHeight="27.0" prefWidth="304.0" textFill="RED" />
       <Button fx:id="overforingToOthersButton" layoutX="4.0" layoutY="349.0" mnemonicParsing="false" onAction="#sendAmountToOthersAccount" text="Överföra till andra konto" />
    </children>
 </AnchorPane>
