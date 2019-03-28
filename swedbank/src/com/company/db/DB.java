@@ -47,31 +47,43 @@ public abstract class DB {
         return null;
     }
 
-    public static List <Transaction> getMyTransaktionerFromDB(String kontoNumber, int numberOftransactions){
+    public static List <Transaction> getAccountsTransactionsFromDB(String kontoType, int numberOftransactions){
             String query =
-                    "SELECT amount, from_to FROM transactions WHERE kontoNumber =? LIMIT ? OFFSET 0";
+                    "SELECT amount, from_to FROM transactions WHERE kontoType =? LIMIT ? OFFSET 0";
         try {
             PreparedStatement stmt = prep(query);
-            stmt.setString(1, kontoNumber);
+            stmt.setString(1, kontoType);
             stmt.setInt(2, numberOftransactions);
             return (List<Transaction>)(List<?>)new ObjectMapper<>(Transaction.class).map(stmt.executeQuery());
         } catch (Exception ex){ ex.printStackTrace(); }
         return null;
     }
 
-    public static void setNewTransaction(String amount, String kontoNumber, String fromOrTo){
+    public static List <Transaction> getMyTransaktionerFromDB(long userID){
         String query =
-                "INSERT INTO transactions SET amount = ?, kontoNumber = ?, from_to = ?";
+                "SELECT amount, from_to FROM transactions WHERE user_ID =? ";
+        try {
+            PreparedStatement stmt = prep(query);
+            stmt.setLong(1, userID);
+            return (List<Transaction>)(List<?>)new ObjectMapper<>(Transaction.class).map(stmt.executeQuery());
+        } catch (Exception ex){ ex.printStackTrace(); }
+        return null;
+    }
+
+    public static void setNewTransaction(String amount, String kontoType, String fromOrTo, long userID){
+        String query =
+                "INSERT INTO transactions SET amount = ?, kontoType = ?, from_to = ?, user_ID = ?";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setString(1, amount);
-            stmt.setString(2, kontoNumber);
+            stmt.setString(2, kontoType);
             stmt.setString(3, fromOrTo);
+            stmt.setLong(4, userID);
             stmt.executeUpdate();
         } catch (Exception e) { e.printStackTrace(); }
     }
 
-    public static MyAccount getUsersAccountFromDB(long userID, String kontoType){
+    public static MyAccount getUsersAccountNumberFromDB(long userID, String kontoType){
         MyAccount result = null;
         String query =
                 "SELECT kontoNumber FROM allAccounts WHERE user_ID =? AND kontoType = ? ";
@@ -81,7 +93,7 @@ public abstract class DB {
             stmt.setString(2, kontoType);
             result = (MyAccount)new ObjectMapper<>(MyAccount.class).mapOne(stmt.executeQuery());
         } catch (Exception e) { e.printStackTrace(); }
-        return result; // return list of accountNumbers;
+        return result; // return accountNumber;
     }
 
     public static List <MyAccount> getAllAccountNumbersFromDB(){

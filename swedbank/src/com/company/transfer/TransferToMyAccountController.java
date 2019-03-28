@@ -75,12 +75,12 @@ public class TransferToMyAccountController {
                                     "-", amountBox.getText(), fromSelectedItem.getKontoNumber());
                             DB.setNewTransaction(
                                     amountBox.getText(),
-                                    toSelectedItem.getKontoNumber(), fromSelectedItem.getKontoNumber());
+                                    toSelectedItem.getKontoType(), fromSelectedItem.getKontoType(), user.getUserID());
 
                             DB.setNewAmountToAccount("+", amountBox.getText(), toSelectedItem.getKontoNumber());
                             DB.setNewTransaction(
                                     "-" + amountBox.getText(),
-                                    fromSelectedItem.getKontoNumber(), toSelectedItem.getKontoNumber());
+                                    fromSelectedItem.getKontoType(), toSelectedItem.getKontoType(), user.getUserID());
                             logInController.switchScene("/com/company/home/homeWindow.fxml");
                         }
                     }

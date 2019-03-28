@@ -33,10 +33,6 @@ public class MyAccount {
         return String.format("%s:   %skr kvar på ditt konto\n  %s ", kontoType, currentAmount, kontoNumber);
     }
 
-    public long getUserID() {
-        return userID;
-    }
-
     public String getKontoType() {
         return kontoType;
     }

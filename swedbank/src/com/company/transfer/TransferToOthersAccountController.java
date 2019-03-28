@@ -72,18 +72,26 @@ public class TransferToOthersAccountController {
                             Integer.parseInt(amountBox.getText())) {
                         setErrorMessageBox("Du har inte tillräcklig saldo");
                     } else {
-                        toUsersAccountNumber = DB.getUsersAccountFromDB(toSelectedItem.getUserID(), "kortkonto");
+                        toUsersAccountNumber = DB.getUsersAccountNumberFromDB(toSelectedItem.getUserID(),
+                                "kortkonto");
+                        System.out.println(toUsersAccountNumber.getKontoNumber());
+                        System.out.println(toUsersAccountNumber.getKontoNumber());
+                        System.out.println(toUsersAccountNumber.getKontoNumber());
                         DB.setNewAmountToAccount(
                                 "-", amountBox.getText(), fromSelectedItem.getKontoNumber());
+
                         DB.setNewTransaction(
                                 amountBox.getText(),
-                                toUsersAccountNumber.getKontoNumber(), fromSelectedItem.getKontoNumber());
+                                "kortkonto",
+                                fromSelectedItem.getKontoNumber(),
+                                toSelectedItem.getUserID());
 
                         DB.setNewAmountToAccount(
                                 "+", amountBox.getText(), toUsersAccountNumber.getKontoNumber());
                         DB.setNewTransaction(
                                 "-" + amountBox.getText(),
-                                fromSelectedItem.getKontoNumber(), toUsersAccountNumber.getKontoNumber());
+                                fromSelectedItem.getKontoType(), toUsersAccountNumber.getKontoNumber(),
+                                user.getUserID());
                         logInController.switchScene("/com/company/home/homeWindow.fxml");
                     }
                 }

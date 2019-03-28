@@ -10,12 +10,17 @@ public class Transaction {
     @Column ("from_to")
     private String fromOrTo;
 
-    @Column
+    @Column ("user_ID")
     private String kontoNumber;
-    public Transaction(String amount, String fromOrTo, String kontoNumber) {
+
+    @Column
+    private long userID;
+
+    public Transaction(String amount, String fromOrTo, String kontoNumber, long userID) {
         this.amount = amount;
         this.fromOrTo = fromOrTo;
         this.kontoNumber = kontoNumber;
+        this.userID = userID;
     }
 
     public Transaction() {

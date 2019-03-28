@@ -18,7 +18,7 @@ import java.util.TimerTask;
 public class HomeController {
 
     @FXML
-    public ListView myAccountsList, transactionList;
+    public ListView myAccountsList, transactionList, lastFiveTransactionsList;
     @FXML
     public Label userNameHomePage;
     @FXML
@@ -31,6 +31,7 @@ public class HomeController {
     @FXML
     void initialize(){
         userNameHomePage.setText(user.getUserName());
+        displayMyLastFiveTransactions();
         displayMyAccounts(user.getUserID());
         //performCardPayment("300", "345364566565466");
     }
@@ -57,7 +58,7 @@ public class HomeController {
             myAccount = (MyAccount) myAccountsList.getSelectionModel().getSelectedItem();
             transactionList.getItems().clear();
 
-            List<Transaction> transactions = DB.getMyTransaktionerFromDB(myAccount.getKontoNumber(), numberOftransactions);
+            List<Transaction> transactions = DB.getAccountsTransactionsFromDB(myAccount.getKontoType(), numberOftransactions);
             for (Transaction transaction : transactions) {
                 transactionList.getItems().add(transaction);
             }
@@ -68,6 +69,14 @@ public class HomeController {
     void visaMerTransaktioner(){
         numberOfTransactions+=10;
         displayMyTransactions(numberOfTransactions);
+    }
+
+    @FXML
+    void displayMyLastFiveTransactions(){
+        List<Transaction> transactions = DB.getMyTransaktionerFromDB(user.getUserID());
+        for (Transaction transaction : transactions) {
+            lastFiveTransactionsList.getItems().add(transaction);
+        }
     }
 
     @FXML

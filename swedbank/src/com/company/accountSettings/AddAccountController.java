@@ -22,8 +22,7 @@ public class AddAccountController {
     User user = LogInController.getUser();
     private List<MyAccount> allAccountNumbers;
     LogInController logInController = new LogInController();
-    private List<AccountTypeList> accountTypeList;
-
+    private List<MyAccount> myAccountsList;
 
     @FXML
     void addAccount() {
@@ -90,8 +89,8 @@ public class AddAccountController {
 
     @FXML
     boolean accountTypeValidation(){
-        accountTypeList = DB.getAllAccountsTypeFromDB();
-        for (AccountTypeList accountType: accountTypeList) {
+        myAccountsList = DB.getMyAccountsFromDB(user.getUserID());
+        for (MyAccount accountType: myAccountsList) {
             if (accountType.getKontoType().equals(accountNameBox.getText())) {
                 setErrorMessageBox("Kontonamnet finns redan!");
                 return false;
