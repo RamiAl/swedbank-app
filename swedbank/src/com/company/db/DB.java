@@ -61,7 +61,7 @@ public abstract class DB {
 
     public static List <Transaction> getMyTransaktionerFromDB(long userID){
         String query =
-                "SELECT amount, from_to FROM transactions WHERE user_ID =? ";
+                "SELECT amount, from_to FROM transactions WHERE user_ID =? order by `time` desc LIMIT 5 OFFSET 0";
         try {
             PreparedStatement stmt = prep(query);
             stmt.setLong(1, userID);
