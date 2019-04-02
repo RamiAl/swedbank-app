@@ -1,10 +1,8 @@
 package com.company.db;
 
 import com.company.Entities.User;
-import com.company.Entities.UserAccountList;
 import com.company.Entities.UserList;
 import com.company.accountSettings.AccountTypeList;
-import com.company.home.FiveLatestTransactions;
 import com.company.home.Transaction;
 import com.company.home.MyAccount;
 
@@ -72,101 +70,6 @@ public abstract class DB {
             PreparedStatement stmt = prep(query);
             stmt.setString(1, kontoNumber);
             return (List<Transaction>)(List<?>)new ObjectMapper<>(Transaction.class).map(stmt.executeQuery());
-        } catch (Exception ex){ ex.printStackTrace(); }
-        return null;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static List <FiveLatestTransactions> getLatestTransactionsFromAccount(String kontoNumber){
-        String query =
-                "SELECT amount, `time`, from_kontoNumber FROM transactions WHERE from_kontoNumber = ?";
-        // order by `time` desc
-        try {
-            PreparedStatement stmt = prep(query);
-            stmt.setString(1, kontoNumber);
-            var transactions = (List<FiveLatestTransactions>)(List<?>)new ObjectMapper<>(FiveLatestTransactions.class).map(stmt.executeQuery());
-            transactions.forEach(t -> t.setAmount(-t.getAmount()));
-            return  transactions;
-        } catch (Exception ex){ ex.printStackTrace(); }
-        return null;
-    }
-
-    public static List <FiveLatestTransactions> getLatestTransactionstoAccount(String kontoNumber){
-        String query =
-                "SELECT amount, `time`, to_kontoNumber FROM transactions WHERE to_kontoNumber = ?";
-        // order by `time` desc
-        try {
-            PreparedStatement stmt = prep(query);
-            stmt.setString(1, kontoNumber);
-            var transactions = (List<FiveLatestTransactions>)(List<?>)new ObjectMapper<>(FiveLatestTransactions.class).map(stmt.executeQuery());
-            return  transactions;
-        } catch (Exception ex){ ex.printStackTrace(); }
-        return null;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public static List <FiveLatestTransactions> getMyLatestFiveTransactions(){
-        String query =
-                "SELECT amount, from_kontoNumber, to_kontoNumber, time FROM transactions " +
-                        "order by `time` desc LIMIT 5 OFFSET 0";
-        try {
-            PreparedStatement stmt = prep(query);
-            return (List<FiveLatestTransactions>)(List<?>)
-                    new ObjectMapper<>(FiveLatestTransactions.class).map(stmt.executeQuery());
         } catch (Exception ex){ ex.printStackTrace(); }
         return null;
     }
