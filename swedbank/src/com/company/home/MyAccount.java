@@ -8,20 +8,15 @@ public class MyAccount {
     private String kontoNumber;
 
     @Column
-    private String currentAmount;
+    private int currentAmount;
 
     @Column
     private String kontoType;
 
-    @Column ("user_ID")
-    private long userID;
-
-
-    public MyAccount(long userID, String kontoNumber, String currentAmount, String kontoType ) {
+    public MyAccount(String kontoNumber, int currentAmount, String kontoType ) {
         this.kontoNumber = kontoNumber;
         this.currentAmount = currentAmount;
         this.kontoType = kontoType;
-        this.userID =userID;
     }
 
     public MyAccount() {
@@ -40,7 +35,7 @@ public class MyAccount {
     public String getKontoNumber(){
         return kontoNumber;
     }
-    public String getCurrentAmount(){
+    public int getCurrentAmount(){
         return currentAmount;
     }
 

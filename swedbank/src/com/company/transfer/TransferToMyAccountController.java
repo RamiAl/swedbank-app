@@ -32,13 +32,12 @@ public class TransferToMyAccountController {
 
     @FXML
     void initialize(){
-        System.out.println(user.getUserID());
-        myAccountsList1 = DB.getMyAccountsFromDB(user.getUserID());
+        myAccountsList1 = DB.getMyAccountsInfo(user.getUserID());
         for (MyAccount myAccount : myAccountsList1) {
             fromDropDownAccountsList.getItems().add(myAccount);
         }
 
-        myAccountsList2 = DB.getMyAccountsFromDB(user.getUserID());
+        myAccountsList2 = DB.getMyAccountsInfo(user.getUserID());
         for (MyAccount myAccount : myAccountsList2) {
             toDropDownAccountsList.getItems().add(myAccount);
         }
@@ -67,20 +66,18 @@ public class TransferToMyAccountController {
                         if (Integer.parseInt(amountBox.getText()) == 0){
                             setErrorMessageBox("Beloppet måste minst vara 1kr");
                         }
-                        else if (Integer.parseInt(fromSelectedItem.getCurrentAmount()) <
+                        else if (fromSelectedItem.getCurrentAmount() <
                                 Integer.parseInt(amountBox.getText())) {
                             setErrorMessageBox("Du har inte tillräcklig saldo");
                         } else {
                             DB.setNewAmountToAccount(
-                                    "-", amountBox.getText(), fromSelectedItem.getKontoNumber());
+                                    "-", Integer.parseInt(amountBox.getText()), fromSelectedItem.getKontoNumber());
                             DB.setNewTransaction(
                                     amountBox.getText(),
-                                    toSelectedItem.getKontoType(), fromSelectedItem.getKontoType(), user.getUserID());
+                                    fromSelectedItem.getKontoNumber(),toSelectedItem.getKontoNumber(), user.getUserID());
 
-                            DB.setNewAmountToAccount("+", amountBox.getText(), toSelectedItem.getKontoNumber());
-                            DB.setNewTransaction(
-                                    "-" + amountBox.getText(),
-                                    fromSelectedItem.getKontoType(), toSelectedItem.getKontoType(), user.getUserID());
+                            DB.setNewAmountToAccount("+", Integer.parseInt(amountBox.getText()),
+                                    toSelectedItem.getKontoNumber());
                             logInController.switchScene("/com/company/home/homeWindow.fxml");
                         }
                     }

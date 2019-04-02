@@ -31,19 +31,16 @@ public class AddAccountController {
             if (accountNameBox.getLength() <= 2 || accountNameBox.getLength() >= 10) {
                 setErrorMessageBox("");
             } else {
-                if (accountTypeValidation()==true){
-                    if (validation(accountNumberBox.getText(),
-                            "kontonumret kan inte innehålla några tecken eller vara tom!") == true) {
-                        if (accountNumberBox.getLength() != 12) {
-                            setErrorMessageBox("Kontonumret måste vara 12 siffror!");
-                        } else {
-                            if (accountNumberValidation()==true){
-                                if (validation(amountToNewAccountBox.getText(),
-                                        "Beloppet kan inte innehålla några tecken eller vara tom!") == true) {
-                                    DB.addAccountToDB(user.getUserID(),
-                                            accountNameBox.getText(), accountNumberBox.getText(), amountToNewAccountBox.getText());
-                                    logInController.switchScene("/com/company/home/homeWindow.fxml");
-                                }
+                if (accountNameValidation()==true){
+                    if (checkAccountNumber()==true) {
+                        if (accountNumberValidation()==true){
+                            if (errorvalidation(amountToNewAccountBox.getText(),
+                                    "Beloppet kan inte innehålla några tecken eller vara tom!") == true)
+                            { DB.addAccount(user.getUserID(),
+                                    accountNameBox.getText(),
+                                    accountNumberBox.getText(),
+                                    Integer.parseInt(amountToNewAccountBox.getText()));
+                                logInController.switchScene("/com/company/home/homeWindow.fxml");
                             }
                         }
                     }
@@ -62,7 +59,7 @@ public class AddAccountController {
         Platform.runLater(() -> errorMessageBox.setText(errorMessage));
     }
 
-    boolean validation(String amount, String errorMessage) {
+    boolean errorvalidation(String amount, String errorMessage) {
         Pattern numberPattern = Pattern.compile("^[\\d]{1,}");
         Matcher numberMatcher = numberPattern.matcher(amount);
         if (numberMatcher.matches()) {
@@ -88,8 +85,22 @@ public class AddAccountController {
     }
 
     @FXML
-    boolean accountTypeValidation(){
-        myAccountsList = DB.getMyAccountsFromDB(user.getUserID());
+    boolean checkAccountNumber(){
+        Pattern userNamePattern = Pattern.compile("([0-9]{4}[,]{1}[0-9]{1}[\\-][0-9]{4}[ ]{1}[0-9]{4})");
+        Matcher userNameMatcher = userNamePattern.matcher(accountNumberBox.getText());
+        if (userNameMatcher.matches()) {
+            return true;
+        }
+        else{
+            setErrorMessageBox("kontonumret måste innehålla 15 tecken och enligt exemplet!");
+            return false;
+
+        }
+    }
+
+    @FXML
+    boolean accountNameValidation(){
+        myAccountsList = DB.getMyAccountsInfo(user.getUserID());
         for (MyAccount accountType: myAccountsList) {
             if (accountType.getKontoType().equals(accountNameBox.getText())) {
                 setErrorMessageBox("Kontonamnet finns redan!");
@@ -100,7 +111,7 @@ public class AddAccountController {
 
     @FXML
     boolean accountNumberValidation(){
-        allAccountNumbers = DB.getAllAccountNumbersFromDB();
+        allAccountNumbers = DB.getAllAccountNumbers();
         for (MyAccount accountNumber : allAccountNumbers) {
             if (accountNumber.getKontoNumber().equals(accountNumberBox.getText())) {
                 setErrorMessageBox("Kontonumret finns redan!");

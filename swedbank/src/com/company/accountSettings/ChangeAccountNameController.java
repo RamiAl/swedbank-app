@@ -27,7 +27,7 @@ public class ChangeAccountNameController {
 
     @FXML
     void initialize() {
-        myAccountsList = DB.getMyAccountsFromDB(user.getUserID());
+        myAccountsList = DB.getMyAccountsInfo(user.getUserID());
         for (MyAccount myAccount : myAccountsList) {
             dropDownAccountsList.getItems().add(myAccount);
         }
@@ -43,10 +43,11 @@ public class ChangeAccountNameController {
                 setErrorMessageBox("Du får inte ändra namn på konton som andra överföra till!");
             } else {
                 if (accountTypeValidation() == true) {
-                    if (getSelectedItem.getKontoType().equals("kortkonto")) {
+                    if (getSelectedItem.getKontoType().equals("kortkonto") ||
+                            getSelectedItem.getKontoType().equals("kortkonto")) {
                         setErrorMessageBox("Du får inte ändra namn på konton som andra överföra till!");
                     } else {
-                        DB.changeAccountNameInDB(getSelectedItem.getKontoNumber(), newAccountNameBox.getText());
+                        DB.changeAccountName(getSelectedItem.getKontoNumber(), newAccountNameBox.getText());
                         logInController.switchScene("/com/company/home/homeWindow.fxml");
                     }
                 }
@@ -56,7 +57,7 @@ public class ChangeAccountNameController {
 
     @FXML
     boolean accountTypeValidation(){
-        accountTypeList = DB.getAllAccountsTypeFromDB();
+        accountTypeList = DB.getAllAccountsType();
         for (AccountTypeList accountType: accountTypeList) {
             if (accountType.getKontoType().equals(newAccountNameBox.getText())) {
                 setErrorMessageBox("Kontonamnet finns redan!");

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -20,5 +21,6 @@
       </Text>
       <Button fx:id="goHomeButton" layoutX="148.0" layoutY="285.0" mnemonicParsing="false" onAction="#goHome" text="Gå tillbaka" />
       <Label fx:id="errorMessageBox" layoutX="135.0" layoutY="361.0" prefHeight="27.0" prefWidth="456.0" textFill="RED" />
+      <Text fill="#868686" layoutX="114.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="t.ex. 4567,3-3456 4567" wrappingWidth="152.0" />
    </children>
 </AnchorPane>

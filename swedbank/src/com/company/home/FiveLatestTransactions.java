@@ -3,9 +3,8 @@ package com.company.home;
 import com.company.annotations.Column;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
-public class Transaction {
+public class FiveLatestTransactions {
 
     @Column
     private int amount;
@@ -19,18 +18,18 @@ public class Transaction {
     @Column
     private Timestamp time = new Timestamp(0);
 
-    public Transaction(int amount, String fromKontoNumber, String toKontoNumber) {
+    public FiveLatestTransactions(int amount, String fromKontoNumber, String toKontoNumber) {
         this.amount = amount;
         this.toKontoNumber = toKontoNumber;
         this.fromKontoNumber = fromKontoNumber;
     }
 
-    public Transaction() {
+    public FiveLatestTransactions() {
     }
 
     @Override
     public String toString(){
-        String accName = toKontoNumber == null ? fromKontoNumber : toKontoNumber;
+        String accName = toKontoNumber != null ? toKontoNumber : fromKontoNumber;
         return String.format("%s:\n    %skr   %s", accName, amount,
                 time.toLocalDateTime().toString().replace('T', ' '));
     }
@@ -45,9 +44,5 @@ public class Transaction {
 
     public long getTime() {
         return time.getTime();
-    }
-
-    public String getKontoNumber() {
-        return fromKontoNumber;
     }
 }

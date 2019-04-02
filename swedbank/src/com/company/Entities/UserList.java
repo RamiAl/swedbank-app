@@ -5,14 +5,14 @@ import com.company.annotations.Column;
 public class UserList {
 
     @Column
-    private String userName;
+    private String firstName;
 
     @Column ("user_ID")
     private long userID;
 
 
     public UserList(String userName, long userID) {
-        this.userName = userName;
+        this.firstName = userName;
         this.userID = userID;
 
     }
@@ -22,7 +22,7 @@ public class UserList {
 
     @Override
     public String toString(){
-        return String.format("%s",userName);
+        return String.format("%s",firstName);
     }
 
     public long getUserID() {

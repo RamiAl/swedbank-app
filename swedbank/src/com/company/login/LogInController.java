@@ -79,7 +79,7 @@ public class LogInController {
     public void switchScene(String pathname){
         try {
             Parent root = FXMLLoader.load(getClass().getResource(pathname));
-            Scene scene = new Scene(root, 600, 640);
+            Scene scene = new Scene(root, 600, 396);
             Main.stage.setScene(scene);
             Main.stage.show();
         } catch (IOException e1) {

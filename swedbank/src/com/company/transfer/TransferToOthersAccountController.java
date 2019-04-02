@@ -68,30 +68,23 @@ public class TransferToOthersAccountController {
                     if (Integer.parseInt(amountBox.getText()) == 0){
                         setErrorMessageBox("Beloppet måste minst vara 1kr");
                     }
-                    else if (Integer.parseInt(fromSelectedItem.getCurrentAmount()) <
+                    else if (fromSelectedItem.getCurrentAmount() <
                             Integer.parseInt(amountBox.getText())) {
                         setErrorMessageBox("Du har inte tillräcklig saldo");
                     } else {
-                        toUsersAccountNumber = DB.getUsersAccountNumberFromDB(toSelectedItem.getUserID(),
+                        toUsersAccountNumber = DB.getUsersAccountNumber(toSelectedItem.getUserID(),
                                 "kortkonto");
-                        System.out.println(toUsersAccountNumber.getKontoNumber());
-                        System.out.println(toUsersAccountNumber.getKontoNumber());
-                        System.out.println(toUsersAccountNumber.getKontoNumber());
                         DB.setNewAmountToAccount(
-                                "-", amountBox.getText(), fromSelectedItem.getKontoNumber());
+                                "-", Integer.parseInt(amountBox.getText()), fromSelectedItem.getKontoNumber());
 
                         DB.setNewTransaction(
                                 amountBox.getText(),
-                                "kortkonto",
                                 fromSelectedItem.getKontoNumber(),
-                                toSelectedItem.getUserID());
+                                toUsersAccountNumber.getKontoNumber(),
+                                user.getUserID());
 
                         DB.setNewAmountToAccount(
-                                "+", amountBox.getText(), toUsersAccountNumber.getKontoNumber());
-                        DB.setNewTransaction(
-                                "-" + amountBox.getText(),
-                                fromSelectedItem.getKontoType(), toUsersAccountNumber.getKontoNumber(),
-                                user.getUserID());
+                                "+", Integer.parseInt(amountBox.getText()), toUsersAccountNumber.getKontoNumber());
                         logInController.switchScene("/com/company/home/homeWindow.fxml");
                     }
                 }
@@ -100,14 +93,14 @@ public class TransferToOthersAccountController {
     }
 
     void displayUser (long userID){
-        myAccountsList1 = DB.getMyAccountsFromDB(userID);
+        myAccountsList1 = DB.getMyAccountsInfo(userID);
         for (MyAccount myAccount : myAccountsList1) {
             fromDropDownAccountsList.getItems().add(myAccount);
         }
     }
 
     void displayOtherUser (int userID){
-        otherUser = DB.getUsersFromDB(userID);
+        otherUser = DB.getUsers(userID);
         for (UserList othersAccount : otherUser) {
             toDropDownAccountsList.getItems().add(othersAccount);
         }
